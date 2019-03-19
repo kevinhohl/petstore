@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+
 	"github.com/kevinhohl/petstore/pkg/model"
 )
 

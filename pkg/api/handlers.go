@@ -3,11 +3,12 @@ package api
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/kevinhohl/petstore/pkg/database"
-	"github.com/kevinhohl/petstore/pkg/model"
 	"io/ioutil"
 	"net/http"
 	"strconv"
+
+	"github.com/kevinhohl/petstore/pkg/database"
+	"github.com/kevinhohl/petstore/pkg/model"
 
 	"github.com/julienschmidt/httprouter"
 )

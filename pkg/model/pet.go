@@ -6,15 +6,15 @@ import (
 )
 
 type Pet struct {
-	ID           int `json:"id"`
+	ID           int      `json:"id"`
 	Category     Category `json:"category"`
 	Name         string   `json:"name"`
-	PhotoUrlsRaw string `json:"-"`
+	PhotoUrlsRaw string   `json:"-"`
 	PhotoUrls    []string `json:"photoUrls"`
-	TagsIDsRaw   string `json:"-"`
-	TagsRaw      string `json:"-"`
-	Tags         []Tag `json:"tags"`
-	Status       string `json:"status"`
+	TagsIDsRaw   string   `json:"-"`
+	TagsRaw      string   `json:"-"`
+	Tags         []Tag    `json:"tags"`
+	Status       string   `json:"status"`
 }
 
 func (p Pet) UnRaw() Pet {
@@ -47,8 +47,8 @@ type Tag struct {
 	Name string `json:"name"`
 }
 
-var StatusToName = map[string]int {
+var StatusToName = map[string]int{
 	"available": 10,
-	"pending": 20,
-	"sold": 30,
+	"pending":   20,
+	"sold":      30,
 }
