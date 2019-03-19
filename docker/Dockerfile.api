@@ -1,0 +1,23 @@
+FROM golang:1.12-alpine AS build
+
+ENV GO111MODULE=on
+ENV CGO_ENABLED=0
+ENV GOOS=linux
+ENV GOARCH=amd64
+
+RUN echo "Configuring go tools" \
+  && apk add --no-cache git bash openssl
+
+WORKDIR /go/src/github.com/kevinhohl/petstore/
+COPY go.mod ./
+RUN echo "Pulling code dependencies" \
+  && go mod download
+COPY . .
+RUN echo "Testing and compiling project" \
+  && go build -ldflags "-w -s -X main.commit=$(git rev-parse HEAD)" -tags netgo -installsuffix netgo -o api -v github.com/kevinhohl/petstore/pkg/main
+
+# Final image
+FROM scratch
+COPY --from=build /go/src/github.com/kevinhohl/petstore/api /api
+EXPOSE 8080
+ENTRYPOINT ["/api"]

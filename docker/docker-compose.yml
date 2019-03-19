@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+
+  db:
+    image: "petstore-db:latest"
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: 'petstore'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+
+  api:
+    image: "petstore-api:latest"
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    links:
+      - "db:database"
+
